@@ -7,7 +7,6 @@ const APIkey = 'EB8AED85-7060-4ADB-A6EB-B0EE52249539';
 const BASE_URL = 'https://rest.coinapi.io/v1/';
 
 const getHistory = async (name: string) => {
-  console.log('getH');
   const responce = await fetch(`${BASE_URL}exchangerate/${name}/USD/history?apikey=${APIkey}&period_id=1DAY&time_start=2022-05-01T00:00:00`);
   return await responce.json();
 }
@@ -16,15 +15,12 @@ export const CryptoCurrency: React.FC = () => {
   const [cryptos, setCruptos] = useState<Crypto[]>([]);
   const [historys, setHistorys] = useState<History[]>([]);
   const [selectedCruptoName, setSelectedCruptoName] = useState<string | null>(null);
-  // const [isOpenExtraInfo, setIsOpenExtraInfo] = useState<boolean>(false);
 
   useEffect(() => {
     fetch(`${BASE_URL}assets?apikey=${APIkey}`)
       .then(responce => responce.json())
       .then(data => {
         setCruptos(data);
-        console.log('effect');
-        
       })
   }, []);
 
@@ -32,15 +28,12 @@ export const CryptoCurrency: React.FC = () => {
     if(!name) {
       return;
     }
-    console.log('load');
     setHistorys([]);
     getHistory(name)
       .then(data => setHistorys(data));
-    // setIsOpenExtraInfo(true);
   }
 
   const selectedCrypto = useMemo(() => {
-    console.log('select');
     return cryptos.find(el => el.asset_id === selectedCruptoName)
   }, [selectedCruptoName, cryptos])
 
