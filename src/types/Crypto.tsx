@@ -5,3 +5,10 @@
   data_end: string,
   price_usd: number
  }
+
+ export type History = {
+  rate_open: string,
+  rate_close: string,
+  rate_high: string,
+  rate_low: string
+ }

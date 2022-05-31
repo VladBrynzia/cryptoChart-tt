@@ -5,8 +5,6 @@ type Props = {
 }
 
 export const CryptoInfo: React.FC<Props> = ({ selectedCrupto }) => {
-  console.log();
-  
   return (
     <div className="list-group">
       <p className="list-group-item">Symbol: {selectedCrupto.asset_id}</p>

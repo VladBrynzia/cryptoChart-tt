@@ -1,23 +1,10 @@
-import { useEffect, useState } from "react";
 import { Area, AreaChart, CartesianGrid, Tooltip, XAxis, YAxis } from "recharts";
 
 type Props = {
-  selectedCruptoName: string | null,
-  BASE_URL: string,
-  APIkey: string
+  history: any
 }
 
-export const CryptoChart: React.FC<Props> = ({ selectedCruptoName, BASE_URL, APIkey }) => {
-  const [history, setHistory] = useState([])
-  
-  useEffect(() => {
-    fetch(`${BASE_URL}exchangerate/BTC/USD/history?apikey=${APIkey}&period_id=1DAY&time_start=2022-05-01T00:00:00`)
-    .then(responce => responce.json())
-    .then(data => {
-      setHistory(data);
-    })
-  }, [APIkey, BASE_URL, selectedCruptoName])
-  
+export const CryptoChart: React.FC<Props> = ({ history }) => {
   return (
     <div>
       <AreaChart width={800} height={500} data={history}
